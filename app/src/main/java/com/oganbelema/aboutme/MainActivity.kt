@@ -12,13 +12,21 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
 
+    private val myName by lazy {
+        MyName(name = getString(R.string.name))
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
 
+        binding.myName = myName
+
         binding.doneButton.setOnClickListener {
             binding.apply {
-                nicknameText.text = binding.nicknameEdit.text
+                binding.myName?.nickname = nicknameEdit.text.toString()
+                // Invalidate all binding expressions and request a new rebind to refresh UI
+                invalidateAll()
                 nicknameEdit.visibility = View.GONE
                 doneButton.visibility = View.GONE
                 nicknameText.visibility = View.VISIBLE
