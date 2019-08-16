@@ -5,23 +5,28 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.view.inputmethod.InputMethodManager
-import kotlinx.android.synthetic.main.activity_main.*
+import androidx.databinding.DataBindingUtil
+import com.oganbelema.aboutme.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
 
+    private lateinit var binding: ActivityMainBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
 
-        done_button.setOnClickListener {
-            nickname_text.text = nickname_edit.text
-            nickname_edit.visibility = View.GONE
-            done_button.visibility = View.GONE
-            nickname_edit.visibility = View.VISIBLE
+        binding.doneButton.setOnClickListener {
+            binding.apply {
+                nicknameText.text = binding.nicknameEdit.text
+                nicknameEdit.visibility = View.GONE
+                doneButton.visibility = View.GONE
+                nicknameText.visibility = View.VISIBLE
+            }
 
             //Hide keyboard
             val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-            imm.hideSoftInputFromWindow(done_button.windowToken, 0)
+            imm.hideSoftInputFromWindow(binding.doneButton.windowToken, 0)
         }
 
     }
