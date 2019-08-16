@@ -2,4 +2,5 @@
     <string name="app_name">About Me</string>
     <string name="name">Belema Ogan</string>
     <string name="yellow_star">Yellow star</string>
+    <string name="bio_text">Write long bio text</string>
 </resources>
